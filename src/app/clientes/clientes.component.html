@@ -1,0 +1,36 @@
+<p-accordion>
+
+  <p-accordionTab header="Clientes" [selected]="true" class="demo-container p-p-3">
+
+
+    <div class="mb-4">
+    <p-button label="Crear cliente"
+              icon="pi pi-user-plus"
+              styleClass="p-button-info"
+              [routerLink]="['/clientes/form']"></p-button>
+  </div>
+
+    <p-table [value]="clientes" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Fecha</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cliente>
+        <tr>
+          <td>{{ cliente.id }}</td>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.apellido }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.createAt | date }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-accordionTab>
+
+</p-accordion>

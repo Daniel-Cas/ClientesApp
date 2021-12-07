@@ -16,8 +16,9 @@ export class HeaderComponent implements OnInit {
 
     this.items = [
     {label: 'Angular App', icon: 'pi pi-prime', separator: true, disabled: true},
-    {label: 'Inicio', icon: 'pi pi-fw pi-inbox'},
-    {label: 'Clientes', icon: 'pi pi-fw pi-id-card'}
+    {label: 'Inicio', icon: 'pi pi-fw pi-inbox', routerLink: '/clientes'},
+    {label: 'Clientes', icon: 'pi pi-fw pi-id-card', routerLink: '/clientes'},
+      {label: 'Directivas', icon: 'pi pi-fw pi-star-fill', routerLink: '/directivas'}
     ];
   }
 

@@ -1,0 +1,47 @@
+
+
+<p-toast></p-toast>
+
+
+<div class=" ">
+
+    <div class="grid">
+    <div class="col-4">
+    </div>
+
+    <div class="col-4">
+        <p-card header="{{title}}">
+            <hr>
+
+            <form autocomplete="off" 
+                  [formGroup]="form" 
+                  (ngSubmit)="sendData()">
+                <h3 class="text-layout"> Nombre </h3>
+                <div class="p-field">
+                    <input type="text" pInputText formControlName="name" id="name" placeholder="Nombre">
+                </div>
+
+                <h3 class="text-layout"> Apellido</h3>
+                <div class="p-field">
+                    <input type="text" pInputText formControlName="lastName" id="lastName" placeholder="Apellido">
+                </div>
+
+                <h3 class="text-layout"> Email</h3>
+                <div class="p-field">
+                    <input type="email" pInputText formControlName="email" id="email" placeholder="Correo electrónico">
+                </div>
+            </form>
+
+            <div class="mt-4">
+                <p-button label="Crear" icon="pi pi-check" type="submit" (click)="sendData()" styleClass="p-button-lg"></p-button>
+            </div>
+
+
+
+        </p-card>
+    </div>
+    <div class="col-4">
+        
+    </div>
+</div>
+</div>

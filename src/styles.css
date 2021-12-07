@@ -5,6 +5,10 @@ html, body {
   font-family: var( --font-family);
 }
 
+footer{
+  background-color: var(--surface-d);
+}
+
 .text-layout{
   color: var(--text-color) ;
 }

@@ -1,0 +1,16 @@
+<p-card header="Listado de lenguajes">
+
+  <button pButton
+          pRipple
+          type="button"
+          (click)="toggleHability()"
+          [icon]=" habilitar == true ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+          class="p-button-rounded">
+  </button>
+
+  <ul *ngIf=" habilitar == true">
+    <li *ngFor="let curso of listaCurso">
+        {{ curso }}
+    </li>
+  </ul>
+</p-card>
