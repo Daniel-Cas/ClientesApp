@@ -1,15 +1,21 @@
-<p-accordion>
 
+
+
+<p-accordion>
+  
   <p-accordionTab header="Clientes" [selected]="true" class="demo-container p-p-3">
 
 
     <div class="mb-4">
-    <p-button label="Crear cliente"
-              icon="pi pi-user-plus"
-              styleClass="p-button-info"
-              [routerLink]="['/clientes/form']"></p-button>
-  </div>
+      <p-button label="Crear cliente"
+      icon="pi pi-user-plus"
+      styleClass="p-button-info"
+      [routerLink]="['form']"></p-button>
+    </div>
 
+   
+   
+    
     <p-table [value]="clientes" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
       <ng-template pTemplate="header">
         <tr>
@@ -18,6 +24,8 @@
           <th>Apellido</th>
           <th>Email</th>
           <th>Fecha</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-cliente>
@@ -26,7 +34,35 @@
           <td>{{ cliente.nombre }}</td>
           <td>{{ cliente.apellido }}</td>
           <td>{{ cliente.email }}</td>
-          <td>{{ cliente.createAt | date }}</td>
+          <td>{{ cliente.createAt | date:'YYYY - MM - dd':'' }}</td>
+         
+          <td> <button pButton pRipple type="button" icon="pi pi-user-edit" class="p-button-rounded p-button-warning p-button-text"
+                        [routerLink]="['/clientes/form', cliente.id]"></button>
+          </td>
+          <td> <button pButton pRipple type="button" icon="pi pi-user-minus" class="p-button-rounded p-button-danger p-button-text"
+                        (click)="showConfirm(cliente)"
+            ></button>
+            <p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+              <ng-template let-message pTemplate="message">
+                  <div class="flex flex-column" style="flex: 1">
+                      <div class="text-center">
+                          <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                          <h4>{{message.summary}}</h4>
+                          <p>{{message.detail}}</p>
+                      </div>
+                      <div class="grid fluid">
+                          <div class="col-6">
+                              <button type="button" pButton (click)="delete(cliente)" label="Yes" class="p-button-success"></button>
+                          </div>
+                          <div class="col-6">
+                              <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                          </div>
+                      </div>
+                  </div>
+              </ng-template>
+            </p-toast>
+            
+          </td>
         </tr>
       </ng-template>
     </p-table>

@@ -1,10 +1,8 @@
 
-
-<p-toast></p-toast>
-
-
+    <p-toast class="custom-toast"></p-toast>
+    
+    
 <div class=" ">
-
     <div class="grid">
     <div class="col-4">
     </div>
@@ -12,10 +10,9 @@
     <div class="col-4">
         <p-card header="{{title}}">
             <hr>
-
             <form autocomplete="off" 
                   [formGroup]="form" 
-                  (ngSubmit)="sendData()">
+                  >
                 <h3 class="text-layout"> Nombre </h3>
                 <div class="p-field">
                     <input type="text" pInputText formControlName="name" id="name" placeholder="Nombre">
@@ -33,7 +30,9 @@
             </form>
 
             <div class="mt-4">
-                <p-button label="Crear" icon="pi pi-check" type="submit" (click)="sendData()" styleClass="p-button-lg"></p-button>
+                <p-button label="Crear" icon="pi pi-user-plus" type="submit" (click)="sendData()" styleClass="p-button-info"  *ngIf=" !this.cliente "></p-button>
+                <p-button label="Actualizar" icon="pi pi-user-edit" type="submit" (click)="update()" styleClass="p-button-warning ml-2" *ngIf="this.cliente" ></p-button>
+
             </div>
 
 

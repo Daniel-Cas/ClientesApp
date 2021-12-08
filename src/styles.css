@@ -12,3 +12,12 @@ footer{
 .text-layout{
   color: var(--text-color) ;
 }
+
+
+.custom-toast {
+  width: 90%;
+  background: #FFD07B;
+}
+
+
+

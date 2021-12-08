@@ -11,6 +11,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {CardModule} from 'primeng/card';
 import {TableModule} from 'primeng/table';
 import {ToastModule} from 'primeng/toast';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -30,8 +32,11 @@ import {ToastModule} from 'primeng/toast';
     AccordionModule,
     BrowserAnimationsModule,
     TableModule,
-    ToastModule
-    
+    ToastModule,
+    MessageModule    
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class PrimengModule { }

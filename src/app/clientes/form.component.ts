@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Cliente } from '../interfaces/cliente';
 import { ClientesService } from './clientes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -12,7 +13,7 @@ import { ClientesService } from './clientes.service';
 })
 export class FormComponent implements OnInit {
 
-  private cliente!: Cliente;
+  public cliente !: Cliente;
 
    title  : string = 'Crear cliente';
 
@@ -25,33 +26,76 @@ export class FormComponent implements OnInit {
   constructor(private fb            : FormBuilder,
               private clienteService: ClientesService,
               private router        : Router,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private activateRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
-    
+    this.loadClient();
+  }
+
+  loadClient(): void{
+    this.activateRoute.params.subscribe( params =>{
+      let id = params['id'];
+
+      if(id){
+        this.clienteService.getCliente(id)
+        .subscribe( (cliente) => {
+
+          this.cliente = cliente;
+          this.form.controls['name'].setValue( cliente.nombre );
+          this.form.controls['lastName'].setValue( cliente.apellido );
+          this.form.controls['email'].setValue( cliente.email );
+        });
+
+      }
+
+    });
   }
 
   sendData(){
 
-    
     this.cliente = {
       nombre: this.form.controls['name'].value,
       apellido: this.form.controls['lastName'].value,
       email: this.form.controls['email'].value
     }
 
+   
     console.log(this.form);
     this.clienteService.create( this.cliente )
     .subscribe( response =>{
     
-      this.showSuccess()
-      this.router.navigate(['clientes']);
+      this.messageService.add({sticky:true, severity:'success', summary: 'Registrado', detail: 'El cliente se ha creado con éxito'});
+
+      // Add delay in route
+      setTimeout(() => {this.router.navigate(['/clientes'])} , 1500);
 
     })
   }
 
-  showSuccess() {
-    this.messageService.add({severity:'Cliente creado', summary: 'Confirm', detail: 'El cliente ha sido creado con éxito!'});
+
+  update(): void {
+
+    this.cliente = {
+      id: this.cliente.id,
+      nombre: this.form.controls['name'].value,
+      apellido: this.form.controls['lastName'].value,
+      email: this.form.controls['email'].value
+    }
+    
+    this.clienteService.update(this.cliente)
+    .subscribe( cliente => {
+      
+      this.messageService.add({sticky:true, severity:'success', summary: 'Actualizado', detail: 'El cliente se ha actualizado con éxito'});
+
+      // Add delay in route
+      setTimeout(() => {this.router.navigate(['/clientes'])} , 1500);
+    })
+  }
+
+ //
+ showSuccess(){
+  
 }
 
 }

@@ -11,15 +11,15 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { PrimengModule } from './primeng/primeng.module';
 import { FormComponent } from './clientes/form.component';
-import {MessagesModule} from 'primeng/messages';
-import {MessageModule} from 'primeng/message';
+
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/clientes', pathMatch: 'full' },
   { path: 'directivas', component: DirectivaComponent},
   { path: 'clientes', component: ClientesComponent},
-  { path: 'clientes/form', component: FormComponent}
+  { path: 'clientes/form', component: FormComponent},
+  { path: 'clientes/form/:id', component: FormComponent}
 ];
 
 @NgModule({
@@ -34,12 +34,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     PrimengModule,
-    RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MessageModule,
-    MessagesModule
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent]
